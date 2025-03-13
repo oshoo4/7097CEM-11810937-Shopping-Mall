@@ -1,0 +1,13 @@
+{
+  "name": "shopping-mall",
+  "version": "1.0.0",
+  "description": "Full-stack shopping mall application",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
