@@ -1,5 +1,5 @@
-// const API_BASE_URL = 'http://localhost:5000/api';
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'http://localhost:5000/api';
+// const API_BASE_URL = '/api';
 
 const apiService = {
     getProducts: async () => {
@@ -65,6 +65,28 @@ const apiService = {
             } catch (parseError) {
                 console.log(parseError);
             }
+            throw new Error(errorMessage);
+        }
+        return await response.json();
+    },
+
+    getProfile: async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error("No token found");
+        }
+        const response = await fetch(`${API_BASE_URL}/users/profile`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        if (!response.ok) {
+            let errorMessage = `HTTP error! status: ${response.status}`;
+            try {
+              const errorData = await response.json();
+              errorMessage = errorData.message || errorMessage;
+            } catch (parseError) {}
             throw new Error(errorMessage);
         }
         return await response.json();
