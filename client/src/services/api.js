@@ -27,6 +27,48 @@ const apiService = {
             throw error;
         }
     },
+
+    login: async (username, password) => {
+        const response = await fetch(`${API_BASE_URL}/users/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+        if (!response.ok) {
+            let errorMessage = `HTTP error! status: ${response.status}`;
+            try {
+              const errorData = await response.json();
+              errorMessage = errorData.message || errorMessage;
+            } catch (parseError) {
+                console.log(parseError);
+            }
+            throw new Error(errorMessage);
+        }
+        return await response.json();
+    },
+
+    register: async (username, email, password) => {
+        const response = await fetch(`${API_BASE_URL}/users/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password }),
+        });
+        if (!response.ok) {
+            let errorMessage = `HTTP error! status: ${response.status}`;
+            try {
+              const errorData = await response.json();
+              errorMessage = errorData.message || errorMessage;
+            } catch (parseError) {
+                console.log(parseError);
+            }
+            throw new Error(errorMessage);
+        }
+        return await response.json();
+    },
 };
 
 export default apiService;
