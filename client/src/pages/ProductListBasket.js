@@ -4,7 +4,7 @@ import Product from '../components/Product';
 
 const ProductListBasket = () => {
     const [products, setProducts] = useState([]);
-    const [basket, setBasket] = useState([]);
+    const [basket, setBasket] = useState(JSON.parse(localStorage.getItem('basket') || '[]'));
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -23,12 +23,18 @@ const ProductListBasket = () => {
         fetchProducts();
     }, []);
 
+     useEffect(() => {
+        localStorage.setItem('basket', JSON.stringify(basket));
+    }, [basket]);
+
+
     const addToBasket = (product) => {
         setBasket([...basket, product]);
     };
 
     const removeFromBasket = (productToRemove) => {
-        setBasket(basket.filter(product => product._id !== productToRemove._id));
+        const updatedBasket = basket.filter(product => product._id !== productToRemove._id);
+        setBasket(updatedBasket);
     };
 
     if (loading) {
