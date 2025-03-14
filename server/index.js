@@ -8,8 +8,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
-
 app.use(express.json());
+
+const productRoutes = require('./routes/products');
+app.use('/api/products', productRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('Connected to MongoDB'))
