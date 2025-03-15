@@ -17,7 +17,6 @@ const Navbar = () => {
 
                 {user && (
                     <>
-                      <li><Link to="/checkout">Checkout</Link></li>
                       <li><Link to="/profile">Profile</Link></li>
                       <li><button onClick={logout}>Logout</button></li>
                     </>

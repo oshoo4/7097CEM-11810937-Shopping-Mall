@@ -16,6 +16,7 @@ const LoginRegister = () => {
         let success = false;
         if (isLogin) {
             success = await login(username, password);
+
         } else {
             success = await register(username, email, password);
         }
@@ -30,7 +31,7 @@ const LoginRegister = () => {
         <div>
             <h2>{isLogin ? 'Login' : 'Register'}</h2>
             <form onSubmit={handleSubmit}>
-                {error && <p style={{ color: 'red' }}>{error.message}</p>}
+                {error && <p className="error-message">{error.message}</p>}
                 <div>
                     <label>Username:</label>
                     <input

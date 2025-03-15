@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiService from '../services/api';
 import Product from '../components/Product';
+import { Link } from 'react-router-dom';
 
 const ProductListBasket = () => {
     const [products, setProducts] = useState([]);
@@ -23,10 +24,9 @@ const ProductListBasket = () => {
         fetchProducts();
     }, []);
 
-     useEffect(() => {
+    useEffect(() => {
         localStorage.setItem('basket', JSON.stringify(basket));
     }, [basket]);
-
 
     const addToBasket = (product) => {
         setBasket([...basket, product]);
@@ -57,12 +57,19 @@ const ProductListBasket = () => {
             <h2>Shopping Basket</h2>
             <ul>
                 {basket.map(product => (
-                    <li key={product._id}>
-                        {product.name} - ${product.price.toFixed(2)}
-                        <button onClick={() => removeFromBasket(product)}>Remove</button>
-                    </li>
+                    <div key={product._id} className='basket-item'>
+                        <span className="basket-item-name">{product.name}</span>
+                        <span className="basket-item-price"> - ${product.price.toFixed(2)}</span>
+                        <button className="remove-button" onClick={() => removeFromBasket(product)}>Remove</button>
+                    </div>
                 ))}
             </ul>
+
+            {basket.length > 0 && (
+                <Link to="/checkout">
+                    <button>Checkout</button>
+                </Link>
+            )}
         </div>
     );
 };

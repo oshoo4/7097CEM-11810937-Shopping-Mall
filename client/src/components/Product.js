@@ -2,7 +2,7 @@ import React from 'react';
 
 const Product = ({ product, onAddToBasket }) => {
     return (
-        <div>
+        <div style={{ margin: '10px' }}>
             <h3>{product.name}</h3>
             <img src={product.imageUrl} alt={product.name} style={{ maxWidth: '100px' }} />
             <p>{product.description}</p>
