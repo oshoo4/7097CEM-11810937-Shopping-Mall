@@ -11,9 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 const productRoutes = require('./routes/products');
-app.use('/api/products', productRoutes);
 const userRoutes = require('./routes/users');
+const orderRoutes = require('./routes/orders');
+
+app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('Connected to MongoDB'))

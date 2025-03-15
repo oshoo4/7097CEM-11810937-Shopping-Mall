@@ -91,6 +91,52 @@ const apiService = {
         }
         return await response.json();
     },
+
+    createOrder: async (items) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found.  User must be logged in to place an order.");
+        }
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ items })
+        });
+        if (!response.ok) {
+            let errorMessage = `HTTP error! status: ${response.status}`;
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.message || errorMessage;
+            } catch (parseError) {}
+            throw new Error(errorMessage);
+        }
+        return await response.json();
+    },
+
+    getUserOrders: async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error("No token found. User must be logged in.");
+        }
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+        if (!response.ok) {
+            let errorMessage = `HTTP error! status: ${response.status}`;
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.message || errorMessage;
+            } catch (parseError) {}
+            throw new Error(errorMessage);
+        }
+        return await response.json();
+    }
 };
 
 export default apiService;
