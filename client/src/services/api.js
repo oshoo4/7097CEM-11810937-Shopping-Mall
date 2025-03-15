@@ -17,7 +17,7 @@ const apiService = {
 
     getProductById: async (id) => {
         try {
-            const response = await fetch(`<span class="math-inline">\{API\_BASE\_URL\}/products/</span>{id}`);
+            const response = await fetch(`${API_BASE_URL}/products/${id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
