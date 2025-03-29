@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     const featuredProduct = {
-        name: 'Awesome T-Shirt',
-        description: 'Super soft and comfortable, 100% cotton.',
-        imageUrl: 'https://placehold.co/300.jpg',
+        name: 'Brown T-Shirt',
+        description: 'Super soft and comfortable Brown T-Shirt',
+        imageUrl: 'https://res.cloudinary.com/dfpyp5bip/image/upload/v1743251316/WhatsApp_Image_2025-03-29_at_12.22.50_yotgbp.jpg',
         price: 19.99,
     };
 
     return (
         <div>
-            <h1>Welcome to Our Shopping Mall!</h1>
+            <h1>Welcome to My Shopping Mall!</h1>
             <p>
-                There's a wide range of high-quality T-shirts and Jeans, all
+                I have a wide range of high-quality T-shirts and Jeans, all
                 hand-picked from my personal wardrobe!  Enjoy a seamless shopping
                 experience with our easy-to-use online store.
             </p>
